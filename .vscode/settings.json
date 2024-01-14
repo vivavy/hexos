@@ -1,0 +1,17 @@
+{
+    "cmake.configureOnOpen": true,
+    "makefile.configurations": [
+        {
+            "name": "Build",
+            "makeArgs": ["image"]
+        },
+        {
+            "name": "Debug",
+            "makeArgs": ["debug"]
+        }
+    ],
+    "makefile.defaultLaunchConfiguration": {
+        "name": "Debug",
+        "makeArgs": ["debug"]
+    }
+}
