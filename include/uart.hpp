@@ -15,9 +15,9 @@
 #define UART0_IMSC      ((volatile unsigned int*)(MMIO_BASE + 0x00201038))
 #define UART0_ICR       ((volatile unsigned int*)(MMIO_BASE + 0x00201044))
 
-/**
+/*/
  * Set baud rate and characteristics (115200 8N1) and map to GPIO
- */
+/*/
 namespace uart {
     void init() {
         register u32 r;
@@ -26,15 +26,15 @@ namespace uart {
         *UART0_CR = 0;         // turn off UART0
 
         // set up clock for consistent divisor values
-        mbox_buffer[0] = 9*4;
-        mbox_buffer[1] = MBOX_REQUEST;
-        mbox_buffer[2] = MBOX_TAG_SETCLKRATE; // set clock rate
-        mbox_buffer[3] = 12;
-        mbox_buffer[4] = 8;
-        mbox_buffer[5] = 2;           // UART clock
-        mbox_buffer[6] = 4000000;     // 4Mhz
-        mbox_buffer[7] = 0;           // clear turbo
-        mbox_buffer[8] = MBOX_TAG_LAST;
+        mbox::buffer[0] = 9*4;
+        mbox::buffer[1] = MBOX_REQUEST;
+        mbox::buffer[2] = MBOX_TAG_SETCLKRATE; // set clock rate
+        mbox::buffer[3] = 12;
+        mbox::buffer[4] = 8;
+        mbox::buffer[5] = 2;           // UART clock
+        mbox::buffer[6] = 4000000;     // 4Mhz
+        mbox::buffer[7] = 0;           // clear turbo
+        mbox::buffer[8] = MBOX_TAG_LAST;
         
         mbox::call(MBOX_CH_PROP);
 

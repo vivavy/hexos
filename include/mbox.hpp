@@ -4,9 +4,6 @@
 #include <gpio.hpp>
 #include <cppdlc.hpp>
 
-/* mailbox message buffer */
-volatile unsigned int  __attribute__((aligned(16))) mbox_buffer[36];
-
 #define MBOX_REQUEST    0
 
 /* channels */
@@ -38,9 +35,12 @@ volatile unsigned int  __attribute__((aligned(16))) mbox_buffer[36];
 #define MBOX_EMPTY      0x40000000
 
 namespace mbox {
+    /* mailbox message buffer */
+    volatile unsigned int  __attribute__((aligned(16))) buffer[36];
+
     int call(u8 ch)
     {
-        unsigned int r = (((u32)((u64) &mbox_buffer) & ~0xF) | (ch & 0xF));
+        unsigned int r = (((u32)((u64) &buffer) & ~0xF) | (ch & 0xF));
         /* wait until we can write to the mailbox */
         do {
             asm volatile("nop");
@@ -56,7 +56,7 @@ namespace mbox {
             /* is it a response to our message? */
             if(r == *MBOX_READ)
                 /* is it a valid successful response? */
-                return mbox_buffer[1] == MBOX_RESPONSE;
+                return buffer[1] == MBOX_RESPONSE;
         }
         return 0;
     }
