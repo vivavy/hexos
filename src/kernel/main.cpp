@@ -1,15 +1,15 @@
-#include <enhancecpp.hpp>
+#include <cppdlc.hpp>
 #include <armv8a.hpp>
 #include <mmu.hpp>
 #include <uart.hpp>
 #include <time.hpp>
 
-nomangle void kernel_main(void) {
+nomangle nil kernel_main(void) {
 	mmu::init();
 	uart::init();
 
-	uart::puts((u8 *)"Success\n");
+	uart::puts("Success\n");
 	do {armv8a::wfe();} while (1);
 }
 
-nomangle void exc_handler() {return;}
+nomangle nil exc_handler() {return;}

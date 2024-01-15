@@ -33,13 +33,13 @@ extern volatile unsigned char _end;
 
 namespace mmu {
     void init() {
-        unsigned long data_page = (unsigned long)&_data/PAGESIZE;
-        unsigned long r, b, *paging=(unsigned long*)&_end;
+        u32 data_page = (u64)&_data/PAGESIZE;
+        u64 r, b; u32 *paging = (u32*)&_end;
 
         /* create MMU translation tables at _end */
 
         // TTBR0, identity L1
-        paging[0]=(unsigned long)((unsigned char*)&_end+2*PAGESIZE) |    // physical address
+        paging[0]=(u32)(u64)((u8*)&_end+2*PAGESIZE) |    // physical address
             PT_PAGE |     // it has the "Present" flag, which must be set, and we have area in it mapped by pages
             PT_AF |       // accessed flag. Without this we're going to have a Data Abort exception
             PT_USER |     // non-privileged
@@ -47,7 +47,7 @@ namespace mmu {
             PT_MEM;       // normal memory
 
         // identity L2, first 2M block
-        paging[2*512]=(unsigned long)((unsigned char*)&_end+3*PAGESIZE) | // physical address
+        paging[2*512]=(u32)(u64)((u8*)&_end+3*PAGESIZE) | // physical address
             PT_PAGE |     // we have area in it mapped by pages
             PT_AF |       // accessed flag
             PT_USER |     // non-privileged
@@ -58,7 +58,7 @@ namespace mmu {
         b=MMIO_BASE>>21;
         // skip 0th, as we're about to map it by L3
         for(r=1;r<512;r++)
-            paging[2*512+r]=(unsigned long)((r<<21)) |  // physical address
+            paging[2*512+r]=(u32)(u64)((r<<21)) |  // physical address
             PT_BLOCK |    // map 2M block
             PT_AF |       // accessed flag
             PT_NX |       // no execute
@@ -67,7 +67,7 @@ namespace mmu {
 
         // identity L3
         for(r=0;r<512;r++)
-            paging[3*512+r]=(unsigned long)(r*PAGESIZE) |   // physical address
+            paging[3*512+r]=(u32)(u64)(r*PAGESIZE) |   // physical address
             PT_PAGE |     // map 4k
             PT_AF |       // accessed flag
             PT_USER |     // non-privileged
@@ -75,7 +75,7 @@ namespace mmu {
             ((r<0x80||r>=data_page)? PT_RW|PT_NX : PT_RO); // different for code and data
 
         // TTBR1, kernel L1
-        paging[512+511]=(unsigned long)((unsigned char*)&_end+4*PAGESIZE) | // physical address
+        paging[512+511]=(u32)(u64)((u8*)&_end+4*PAGESIZE) | // physical address
             PT_PAGE |     // we have area in it mapped by pages
             PT_AF |       // accessed flag
             PT_KERNEL |   // privileged
@@ -83,7 +83,7 @@ namespace mmu {
             PT_MEM;       // normal memory
 
         // kernel L2
-        paging[4*512+511]=(unsigned long)((unsigned char*)&_end+5*PAGESIZE) |   // physical address
+        paging[4*512+511]=(u32)(u64)((u8*)&_end+5*PAGESIZE) |   // physical address
             PT_PAGE |     // we have area in it mapped by pages
             PT_AF |       // accessed flag
             PT_KERNEL |   // privileged
@@ -91,7 +91,7 @@ namespace mmu {
             PT_MEM;       // normal memory
 
         // kernel L3
-        paging[5*512]=(unsigned long)(MMIO_BASE+0x00201000) |   // physical address
+        paging[5*512]=(u32)(u64)(MMIO_BASE+0x00201000) |   // physical address
             PT_PAGE |     // map 4k
             PT_AF |       // accessed flag
             PT_NX |       // no execute
@@ -110,13 +110,13 @@ namespace mmu {
         }
 
         // first, set Memory Attributes array, indexed by PT_MEM, PT_DEV, PT_NC in our example
-        r=  (0xFF << 0) |    // AttrIdx=0: normal, IWBWA, OWBWA, NTR
+        r = (0xFF << 0) |    // AttrIdx=0: normal, IWBWA, OWBWA, NTR
             (0x04 << 8) |    // AttrIdx=1: device, nGnRE (must be OSH too)
             (0x44 <<16);     // AttrIdx=2: non cacheable
         asm volatile ("msr mair_el1, %0" : : "r" (r));
 
         // next, specify mapping characteristics in translate control register
-        r=  (0b00LL << 37) | // TBI=0, no tagging
+        r = (0b00LL << 37) | // TBI=0, no tagging
             (b << 32) |      // IPS=autodetected
             (0b10LL << 30) | // TG1=4k
             (0b11LL << 28) | // SH1=3 inner
@@ -134,9 +134,9 @@ namespace mmu {
 
         // tell the MMU where our translation tables are. TTBR_CNP bit not documented, but required
         // lower half, user space
-        asm volatile ("msr ttbr0_el1, %0" : : "r" ((unsigned long)&_end + TTBR_CNP));
+        asm volatile ("msr ttbr0_el1, %0" : : "r" ((u8*)&_end + TTBR_CNP));
         // upper half, kernel space
-        asm volatile ("msr ttbr1_el1, %0" : : "r" ((unsigned long)&_end + TTBR_CNP + PAGESIZE));
+        asm volatile ("msr ttbr1_el1, %0" : : "r" ((u8*)&_end + TTBR_CNP + PAGESIZE));
 
         // toggle some bits in system control register to enable page translation
         asm volatile ("dsb ish; isb; mrs %0, sctlr_el1" : "=r" (r));

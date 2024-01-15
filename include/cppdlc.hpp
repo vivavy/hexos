@@ -2,6 +2,11 @@
 #define __STDINT_HPP__
 
 #define nomangle extern "C"
+#define false 0
+#define true -1
+#define null false
+#define none null
+#define nil void
 
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;

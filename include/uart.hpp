@@ -1,7 +1,7 @@
 #ifndef __UART0DEV__
 #define __UART0DEV__
 
-#include <enhancecpp.hpp>
+#include <cppdlc.hpp>
 #include <gpio.hpp>
 #include <mbox.hpp>
 
@@ -94,6 +94,15 @@ namespace uart {
         }
     }
 
+    void puts(const char *s) {
+        while(*s) {
+            /* convert newline to carrige return + newline */
+            if(*s == '\n')
+                putc('\r');
+            putc(*s++);
+        }
+    }
+
     void hex(u32 d) {
         u32 n;
         i32 c;
@@ -113,7 +122,7 @@ namespace uart {
 
         for(a = (u64)ptr; a < (u64)ptr + 512; a += 16) {
             hex(a);
-            puts((u8 *)": ");
+            puts(": ");
 
             for(b = 0; b < 16; b++) {
                 c = *((u8*)(a + b));

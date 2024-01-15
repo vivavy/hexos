@@ -2,7 +2,7 @@
 #define __MESSAGEBOX__
 
 #include <gpio.hpp>
-#include <enhancecpp.hpp>
+#include <cppdlc.hpp>
 
 /* mailbox message buffer */
 volatile unsigned int  __attribute__((aligned(16))) mbox_buffer[36];

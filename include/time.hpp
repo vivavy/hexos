@@ -2,7 +2,7 @@
 #define __TIME_WRAPPER__
 
 #include <gpio.hpp>
-#include <enhancecpp.hpp>
+#include <cppdlc.hpp>
 
 #define SYSTMR_LO        ((volatile unsigned int*)(MMIO_BASE + 0x00003004))
 #define SYSTMR_HI        ((volatile unsigned int*)(MMIO_BASE + 0x00003008))
