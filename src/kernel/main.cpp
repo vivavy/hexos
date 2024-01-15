@@ -5,8 +5,8 @@
 #include <time.hpp>
 
 nomangle nil kernel_main(void) {
-	mmu::init();
 	uart::init();
+	mmu::init();
 
 	uart::puts("Success\n");
 	do {armv8a::wfe();} while (1);
