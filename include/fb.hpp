@@ -21,7 +21,7 @@ typedef struct {
     unsigned int width;
     unsigned char glyphs;
 } __attribute__((packed)) psf_t;
-extern volatile unsigned char _binary_src_uart_graphics_fonts_font_psf_start;
+extern volatile unsigned char _binary_res_fonts_font_psf_psf_start;
 
 
 typedef struct {
@@ -39,7 +39,7 @@ typedef struct {
     unsigned int   kerning_offs;
     unsigned int   cmap_offs;
 } __attribute__((packed)) sfn_t;
-extern volatile unsigned char _binary_src_uart_graphics_fonts_font_sfn_start;
+extern volatile unsigned char _binary_res_fonts_font_sfn_sfn_start;
 
 
 unsigned int width, height, pitch, isrgb;   /* dimensions and channel order */
@@ -112,11 +112,11 @@ namespace fb {
     void print(int x, int y, char *s)
     {
         // get our font
-        psf_t *font = (psf_t*)&_binary_src_uart_graphics_fonts_font_psf_start;
+        psf_t *font = (psf_t*)&_binary_res_fonts_font_psf_psf_start;
         // draw next character if it's not zero
         while(*s) {
             // get the offset of the glyph. Need to adjust this to support unicode table
-            unsigned char *glyph = (unsigned char*)&_binary_src_uart_graphics_fonts_font_psf_start +
+            unsigned char *glyph = (unsigned char*)&_binary_res_fonts_font_psf_psf_start +
             font->headersize + (*((unsigned char*)s)<font->numglyph?*s:0)*font->bytesperglyph;
             // calculate the offset on screen
             int offs = (y * pitch) + (x * 4);

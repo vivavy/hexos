@@ -7,7 +7,7 @@
 
 FBInfo fb_info;
 
-nomangle nil kernel_main(void) {
+nomangle nil kernel_main() {
 	uart::init();
 	mmu::init();
 

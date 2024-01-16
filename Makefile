@@ -1,16 +1,16 @@
-CPP_EXCEPTIONS = -Wno-array-bounds -Wno-stringop-overflow -Wno-write-strings -Wno-register -Wno-unused-function -Wno-overflow
+CPP_EXCEPTIONS = -Wno-array-bounds -Wno-stringop-overflow -Wno-write-strings -Wno-register -Wno-unused-function -Wno-overflow -Wno-sign-compare
 
 test:
 	@make image >/dev/null
 	@make debug >/dev/null
 
 font:
-	aarch64-elf-ld -r -b binary -o psf.o res/fonts/font.psf
-	aarch64-elf-ld -r -b binary -o sfn.o res/fonts/font.sfn
+	@aarch64-elf-ld -r -b binary -o psf.o res/fonts/font_psf.psf
+	# aarch64-elf-ld -r -b binary -o sfn.o res/fonts/font_sfn.sfn
 
 image: boot kernel font
 	@aarch64-elf-gcc -T scripts/linker.ld -o hexos.elf -ffreestanding \
-		-O2 -nostdlib boot.o psf.o sfn.o kernel.o -lgcc
+		-O2 -nostdlib boot.o psf.o kernel.o
 	@aarch64-elf-objcopy hexos.elf -O binary hexos.img
 	@rm -f hexos.elf boot.o kernel.o kernel.S font.o
 
