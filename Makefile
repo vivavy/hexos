@@ -1,28 +1,38 @@
-CPP_EXCEPTIONS = -Wno-array-bounds -Wno-stringop-overflow -Wno-write-strings -Wno-register -Wno-unused-function -Wno-overflow -Wno-sign-compare
+CWNO1 = -Wno-array-bounds -Wno-stringop-overflow -Wno-register -Wno-unused-function
+CWNO2 = -Wno-sign-compare
+CWNO = ${CWNO1} ${CWNO2}
+LDFLAGS = -T scripts/linker.ld -o kernel.elf -ffreestanding -O2 -nostdlib
+INCLUDE = include
+CFLAGS = -ffreestanding -c -S src/kernel/main.cpp -o kernel.S -O2 -Wall -Werror -Wextra -I ${INCLUDE}
+OBJECTS = boot-armv8a.o kernel.o # psf.o sfn.o
+OUTFILE = boot.img
+RAM = 1024
+BOARD = raspi3b
 
-test:
+test:  # nested calls. very useful, but unstable technique
 	@make image >/dev/null
 	@make debug >/dev/null
+	@make clear >/dev/null
+	@clear
+
+clear:
+	@rm -f kernel.elf ${OBJECTS} kernel.S
 
 font:
 	@aarch64-elf-ld -r -b binary -o psf.o res/fonts/font_psf.psf
-	# aarch64-elf-ld -r -b binary -o sfn.o res/fonts/font_sfn.sfn
+	@aarch64-elf-ld -r -b binary -o sfn.o res/fonts/font_sfn.sfn
 
 image: boot kernel font
-	@aarch64-elf-gcc -T scripts/linker.ld -o hexos.elf -ffreestanding \
-		-O2 -nostdlib boot.o psf.o kernel.o
-	@aarch64-elf-objcopy hexos.elf -O binary hexos.img
-	@rm -f hexos.elf boot.o kernel.o kernel.S font.o
+	@aarch64-elf-gcc ${LDFLAGS} ${OBJECTS}
+	@aarch64-elf-objcopy kernel.elf -O binary ${OUTFILE}
 
 boot:
-	@aarch64-elf-as -c src/boot/armv8a.S -I include -o boot.o
+	@aarch64-elf-as -c src/boot/armv8a.S -I ${INCLUDE} -o boot-armv8a.o
 
 kernel:
-	@aarch64-elf-g++ -ffreestanding -c -S src/kernel/main.cpp \
-		-o kernel.S -O3 -Wall -Werror -Wno-error \
-		-Wextra -I include ${CPP_EXCEPTIONS}
-	@aarch64-elf-as -c  kernel.S -o kernel.o
+	@aarch64-elf-g++ ${CFLAGS} ${CWNO}
+	@aarch64-elf-as -c kernel.S -o kernel.o
 
 debug:
-	@qemu-system-aarch64 -M raspi3b -kernel hexos.img \
-		-serial stdio -m 1024 2>/dev/null
+	@qemu-system-aarch64 -M ${BOARD} -kernel ${OUTFILE} \
+		-serial stdio -m ${RAM} 2>/dev/null

@@ -46,7 +46,8 @@ unsigned int width, height, pitch, isrgb;   /* dimensions and channel order */
 
 namespace fb {
     unsigned char *buffer;                  /* raw frame buffer address */
-    nil init(FBInfo fb_info) {
+    FBInfo fb_info;
+    nil init() {
         time::sleep(100000);
 
         mbox::buffer[0] = 35*4;
