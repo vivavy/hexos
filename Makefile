@@ -1,21 +1,21 @@
 CWNO1 = -Wno-array-bounds -Wno-stringop-overflow -Wno-register -Wno-unused-function
 CWNO2 = -Wno-sign-compare
 CWNO = ${CWNO1} ${CWNO2}
-LDFLAGS = -T scripts/linker.ld -o kernel.elf -ffreestanding -O2 -nostdlib
+LDFLAGS = -T scripts/linker.ld -o kernel.elf -ffreestanding -O2 -nostdlib -nostartfiles
 INCLUDE = include
 CFLAGS = -ffreestanding -c -S src/kernel/main.cpp -o kernel.S -O2 -Wall -Werror -Wextra -I ${INCLUDE}
-OBJECTS = boot-armv8a.o kernel.o # psf.o sfn.o
+OBJECTS = boot-armv8a.o kernel.o psf.o sfn.o
 OUTFILE = boot.img
 RAM = 1024
 BOARD = raspi3b
 
 test:  # nested calls. very useful, but unstable technique
 	@make image >/dev/null
+	@make clean >/dev/null
 	@make debug >/dev/null
-	@make clear >/dev/null
 	@clear
 
-clear:
+clean:
 	@rm -f kernel.elf ${OBJECTS} kernel.S
 
 font:

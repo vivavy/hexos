@@ -1,23 +1,22 @@
+#define CORE(n)#0xd8+(n*8)
+
 .section ".text.boot"
 
 .global _start
-.extern exc_handler
-
 _start:
-    // read cpu id, stop slave cores
-    mrs     x1, mpidr_el1
-    and     x1, x1, #3
-    cbz     x1, run
-    // cpu id > 0, halt
-halt:
-    wfe
-    b       halt
+    // read cpu id
+    // mrs x0, mpidr_el1
+    // and x0, x0, #3
+    // cbnz x0, run
 
-run:  // cpu id == 0
+    // cpu id == 0
+    // ldr x0, =run
+    // mov x1, CORE(1)
+    // str x0, [x1]
 
+run:
     // set top of stack just before our code (stack grows to a lower address per AAPCS64)
     ldr     x1, =_start
-
 
     // set up EL1
     mrs     x0, CurrentEL
@@ -38,7 +37,7 @@ run:  // cpu id == 0
     // running at EL2?
 check_el2:
     cmp     x0, #4
-    beq     clear_bss
+    beq     kmain
     msr     sp_el1, x1
     // enable CNTP for EL1
     mrs     x0, cnthctl_el2
@@ -46,11 +45,11 @@ check_el2:
     msr     cnthctl_el2, x0
     msr     cntvoff_el2, xzr
     // disable coprocessor traps
-    /*mov     x0, #0x33FF
+    mov     x0, #0x33FF
     msr     cptr_el2, x0
     msr     hstr_el2, xzr
     mov     x0, #(3 << 20)
-    msr     cpacr_el1, x0*/
+    msr     cpacr_el1, x0
     // enable AArch64 in EL1
     mov     x0, #(1 << 31)      // AArch64
     orr     x0, x0, #(1 << 1)   // SWIO hardwired on Pi3
@@ -66,27 +65,23 @@ check_el2:
     // change execution level to EL1
     mov     x2, #0x3c4
     msr     spsr_el2, x2
-    adr     x2, clear_bss
+    adr     x2, kmain
     msr     elr_el2, x2
     eret
 
-
-
-clear_bss:
-    mov     sp, x1 // stack pointer
-// clear_bss
-    ldr     x1, =__bss_start
-    ldr     w2, =__bss_size
-1:  cbz     w2, kmain
-    str     xzr, [x1], #8
-    sub     w2, w2, #1
-    cbnz    w2, 1b
-
-
 kmain:
+    // Stack pointer
+    ldr     x0, =_start
+    mov     sp, x0
+
+    // Core ID
+    mrs x0, mpidr_el1
+    and x0, x0, #3
+
     bl      kernel_main
 
-    // for failsafe, halt this core
+halt:
+    wfe
     b       halt
 
     // important, code has to be properly aligned

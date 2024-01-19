@@ -7,6 +7,9 @@
 #define null false
 #define none null
 #define nil void
+#define skip volatile
+#define reg register
+#define HEX(d) (d > 9 ? 'A' : '0')
 
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;

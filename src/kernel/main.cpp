@@ -9,9 +9,9 @@ nomangle nil kernel_main() {
 	uart::init();
 	mmu::init();
 
-	uart::putc('X');
+	// uart::putc('X');
 
-	// uart::puts("Success\n");
+	uart::puts("Success\n");
 
 	// fb::init();
 
@@ -20,7 +20,7 @@ nomangle nil kernel_main() {
 
 	// uart::puts("Still alive\n");
 	
-	do {armv8a::wfe();} while (true);
+	do armv8a::wfe(); while (true);
 }
 
 nomangle nil exc_handler() {return;}

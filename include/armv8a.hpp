@@ -7,29 +7,21 @@ namespace armv8a {
     
     static u64 cpuid() {
         unsigned long long mpidr;
-        asm volatile("mrs %0, mpidr_el1" : "=r"(mpidr));
-        return mpidr & 0xff;
+        asm skip ("mrs %0, mpidr_el1" : "=r"(mpidr));
+        return mpidr & 255;
     }
 
-    static void wfe() {
-        asm volatile("wfe");
-    }
+    static nil wfe() { asm skip ("wfe"); }
 
-    static void isb() {
-        asm volatile("isb");
-    }
+    static nil isb() { asm skip ("isb"); }
 
-    static void enable_irq() {
-        asm volatile("msr daifclr, #0x2" ::: "memory");
-    }
+    static nil enable_irq() { asm skip("msr daifclr, #0x2" ::: "memory"); }
 
-    static void disable_irq() {
-        asm volatile("msr daifset, #0x2" ::: "memory");
-    }
+    static nil disable_irq() { asm skip("msr daifset, #0x2" ::: "memory"); }
 
     static u64 get_el() {
         u64 el;
-        asm volatile ("mrs %0, CurrentEL" : "=r" (el));
+        asm skip ("mrs %0, CurrentEL" : "=r" (el));
         return (el >> 2) & 3;
     }
 };
