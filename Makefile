@@ -1,6 +1,4 @@
-CWNO1 = -Wno-array-bounds -Wno-stringop-overflow -Wno-register -Wno-unused-function
-CWNO2 = -Wno-sign-compare
-CWNO = ${CWNO1} ${CWNO2}
+CWN = -Wno-array-bounds -Wno-stringop-overflow -Wno-register -Wno-unused-function -Wno-sign-compare -Wno-parentheses
 LDFLAGS = -T scripts/linker.ld -o kernel.elf -ffreestanding -O2 -nostdlib -nostartfiles
 INCLUDE = include
 CFLAGS = -ffreestanding -c -S src/kernel/main.cpp -o kernel.S -O2 -Wall -Werror -Wextra -I ${INCLUDE}
@@ -12,8 +10,8 @@ BOARD = raspi3b
 test:  # nested calls. very useful, but unstable technique
 	@make image >/dev/null
 	@make clean >/dev/null
-	@make debug >/dev/null
 	@clear
+	@make debug >/dev/null
 
 clean:
 	@rm -f kernel.elf ${OBJECTS} kernel.S
@@ -30,7 +28,7 @@ boot:
 	@aarch64-elf-as -c src/boot/armv8a.S -I ${INCLUDE} -o boot-armv8a.o
 
 kernel:
-	@aarch64-elf-g++ ${CFLAGS} ${CWNO}
+	@aarch64-elf-g++ ${CFLAGS} ${CWN}
 	@aarch64-elf-as -c kernel.S -o kernel.o
 
 debug:

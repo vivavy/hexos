@@ -3,7 +3,7 @@
 #include <mmu.hpp>
 #include <uart.hpp>
 // #include <time.hpp>
-// #include <fb.hpp>
+#include <fb.hpp>
 
 nomangle nil kernel_main() {
 	uart::init();
@@ -13,7 +13,7 @@ nomangle nil kernel_main() {
 
 	uart::puts("Success\n");
 
-	// fb::init();
+	fb::init(800, 600, 32);
 
 	// fb::print(0, 0, (char *)"Hello, World!");
 	// fb::flush();

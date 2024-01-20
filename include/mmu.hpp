@@ -6,11 +6,11 @@
 
 #define PAGESIZE    4096
 
-#define HEAP_START  ((uint64_t)&_end + 0x100000)
+#define HEAP_START  ((u64)&_end + 1048576)
 
 // granularity
-#define PT_PAGE     0b11        // 4k granule
-#define PT_BLOCK    0b01        // 2M granule
+#define PT_PAGE     3        // 4k granule
+#define PT_BLOCK    1        // 2M granule
 // accessibility
 #define PT_KERNEL   (0   <<  6)      // privileged, supervisor EL1 access only
 #define PT_USER     (1   <<  6)      // unprivileged, EL0 access allowed
@@ -28,8 +28,8 @@
 
 #define TTBR_CNP    1
 
-extern volatile unsigned char _data;
-extern volatile unsigned char _end;
+extern skip u8 _data;
+extern skip u8 _end;
 
 
 namespace mmu {

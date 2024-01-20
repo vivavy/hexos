@@ -21,12 +21,13 @@
 
 namespace uart {
     void init() {
-        reg u32 r;
+        register unsigned int r;
+
         // initialize UART
         *UART0_CR = 0;         // turn off UART0
 
         // set up clock for consistent divisor values
-        mbox::buffer[0] = 36;
+        mbox::buffer[0] = 9*4;
         mbox::buffer[1] = MBOX_REQUEST;
         mbox::buffer[2] = MBOX_TAG_SETCLKRATE; // set clock rate
         mbox::buffer[3] = 12;
@@ -38,27 +39,21 @@ namespace uart {
         mbox::call(MBOX_CH_PROP);
 
         // map UART0 to GPIO pins
-        r = *GPFSEL1;
-        r &= 4294709247; // gpio14, gpio15
-        r |= 147456;    // alt0
+        r=*GPFSEL1;
+        r&=~((7<<12)|(7<<15)); // gpio14, gpio15
+        r|=(4<<12)|(4<<15);    // alt0
         *GPFSEL1 = r;
         *GPPUD = 0;            // enable pins 14 and 15
-        r = 150;
-
-        while (r--) asm skip ("nop");
-
-        *GPPUDCLK0 = *GPFSEL1;
-        r = 150;
-
-        while (r--) asm skip ("nop");
-
+        r=150; while(r--) { asm volatile("nop"); }
+        *GPPUDCLK0 = (1<<14)|(1<<15);
+        r=150; while(r--) { asm volatile("nop"); }
         *GPPUDCLK0 = 0;        // flush GPIO setup
 
-        *UART0_ICR = 2047;    // clear interrupts
+        *UART0_ICR = 0x7FF;    // clear interrupts
         *UART0_IBRD = 2;       // 115200 baud
         *UART0_FBRD = 11;
-        *UART0_LCRH = 112;  // 8n1, enable FIFOs
-        *UART0_CR = 769;     // enable Tx, Rx, UART
+        *UART0_LCRH = 7 << 4;  // 8n1, enable FIFOs
+        *UART0_CR = 0x301;     // enable Tx, Rx, UART
     }
 
     nil wait() { do asm volatile("nop"); while (*UART0_FR & 32); }
@@ -71,13 +66,7 @@ namespace uart {
 
     nil puts(const char *s) { while(*s) putc(*s++); }
 
-    nil hex(u32 d) {
-        for(i32 c = 28; c >= 0; c -= 4) {
-            u8 n = (d >> c) & 15;
-            n += HEX(n);
-            putc(n);
-        }
-    }
+    nil hex(u32 d) { for (i32 c = 28; c >= 0; c -= 4) putc((d >> c) & 15 + HEX((d >> c) & 15)); }
 
     nil dump(nil *ptr) {
         for (u64 a = (u64)ptr; a < (u64)ptr + 512; a += 16) {
@@ -96,14 +85,10 @@ namespace uart {
                 d += HEX(d);
                 putc(d);
                 putc(' ');
-                if (b % 4 == 3)
-                    putc(' ');
+                if (b % 4 == 3) putc(' ');
             }
 
-            for (u64 b = 0; b < 16; b++) {
-                u8 c = *((u8*)(a + b));
-                putc(c < 32 || c >= 127 ? '.' : c);
-            }
+            for (u64 b = 0; b < 16; b++) putc(*((u8*)(a + b)) < 32 || *((u8*)(a + b)) >= 127 ? '.' : *((u8*)(a + b)));
 
             putc('\n');
         }

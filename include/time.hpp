@@ -9,11 +9,7 @@
 
 namespace time {
 
-    nil wait_cycles(u32 n) {
-        if (n)
-            while (n--)
-                asm skip ("nop");
-    }
+    nil wait_cycles(u32 n) { while (n--) asm skip ("nop"); }
 
     nil sleep(u32 mcs) {
         reg u64 f, t, r;
@@ -24,9 +20,7 @@ namespace time {
         // calculate required count increase
         u64 i = ((f / 1000) * mcs) / 1000;
         // loop while counter increase is less than i
-        do {
-            asm skip ("mrs %0, cntpct_el0" : "=r"(r));
-        } while (r - t < i);
+        do asm skip ("mrs %0, cntpct_el0" : "=r"(r));  while (r - t < i);
     }
 
     u64 get_uptime() {

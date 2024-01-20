@@ -10,15 +10,18 @@
 #define skip volatile
 #define reg register
 #define HEX(d) (d > 9 ? 'A' : '0')
+#define packed __attribute__((packed))
+#define ALIGN(x) __attribute__((aligned(x)))
+#define ns namespace
 
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long uint64_t;
+typedef unsigned long uint32_t;
+typedef unsigned long long uint64_t;
 typedef signed char int8_t;
 typedef signed short int16_t;
-typedef signed int int32_t;
-typedef signed long int64_t;
+typedef signed long int32_t;
+typedef signed long long int64_t;
 
 typedef uint8_t u8;
 typedef uint16_t u16;
