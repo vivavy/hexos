@@ -13,3 +13,11 @@ To build the distribution:
 1. Install dependencies
 2. Run `make`
 3. Done!
+
+## Folders and files
+
+* `buildenv`: Build environment.
+* `dist`: HexOS distribution.
+* `docs`: HexOS documentation.
+* `src`: HexOS source code.
+* `Makefile`: Makefile for building the distribution.

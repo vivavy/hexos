@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This script is used to activate the build environment.
+# It makes several (or one) symlink(s) to necessary script(s).
+
+ln -s $PWD/buildenv/hcc $HOME/.local/bin/hcc
