@@ -4,7 +4,7 @@
 # It calls the build script of the x86_64-elf-gcc compiler and the elf2hxe tool.
 
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 3 ]; then
     echo "usage: hcc <source file> <output file> <config file>"
     exit 1
 fi
