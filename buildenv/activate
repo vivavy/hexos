@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # This script is used to activate the build environment.
-# It makes several (or one) symlink(s) to necessary script(s).
+# It adds this directory to the PATH and sets the prompt.
 
-ln -s $PWD/buildenv/hcc $HOME/.local/bin/hcc
+chmod +x buildenv/hcc
+
+export OLD_PATH="${PATH}"
+export PATH="$PWD/buildenv:${PATH}"
+
+export OLD_PS1="${PS1}"
+export PS1="\e[1;34m(\e[1;32mhexos-x86_64\e[1;34m)\e[0m ${OLD_PS1}"

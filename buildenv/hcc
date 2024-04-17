@@ -1,14 +1,19 @@
 #!/bin/bash
 
 # This script is used to build the operating system.
-# It calls the build script of the tcc compiler and the elf2hxe tool.
+# It calls the build script of the x86_64-elf-gcc compiler and the elf2hxe tool.
+
+
+if [ "$#" -ne 1 ]; then
+    echo "usage: hcc <source file> <output file> <config file>"
+    exit 1
+fi
 
 # The build script of the tcc compiler.
-tcc -o /tmp/hcc_build $1
+x86_64-elf-gcc -m64 -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding $1 -o /tmp/hcc_build
 if [ $? -ne 0 ]; then
-    echo "Error: tcc build script failed."
     exit 1
 fi
 
 # The elf2hxe tool.
-elf2hxe /tmp/hcc_build $2
+elf2hxe /tmp/hcc_build /tmp_build $2 $3

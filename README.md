@@ -4,7 +4,7 @@ HexOS x86-64 distribution
 Dependencies:
 
 * [elf2hxe](https://github.com/vivavy/elf2hxe)
-* [tcc](https://github.com/chaoslawful/tcc)
+* [x86_64-elf-gcc](https://gcc.gnu.org/)
 * [python3](https://www.python.org/)
 * [bootylkaloader](https://github.com/pocom4/bootylkaloader)
 

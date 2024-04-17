@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # This script is used to deactivate the build environment.
-# It removes the symlink(s) to necessary script(s).
+# It removes this directory from the PATH and unsets the prompt.
 
-rm -f $HOME/.local/bin/hcc
+chmod -x buildenv/hcc
+
+export PATH="${OLD_PATH}"
+unset OLD_PATH
+
+export PS1="${OLD_PS1}"
+unset OLD_PS1

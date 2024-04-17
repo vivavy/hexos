@@ -7,3 +7,10 @@ This directory contains the kernel source code.
 ```
 $ make
 ```
+
+## Files
+
+* `config.json`: Kernel build configuration.
+* `include`: Header files for the kernel.
+* `Makefile`: Makefile for building the kernel.
+* `src`: Source files for the kernel.
