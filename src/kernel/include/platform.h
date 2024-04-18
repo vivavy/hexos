@@ -10,4 +10,6 @@
 
 #include <types.h>
 
-void hlt(void);
+void halt(void);
+
+#include "../src/platform.c"

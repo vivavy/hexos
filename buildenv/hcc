@@ -15,4 +15,4 @@ if [ $? -ne 0 ]; then
 fi
 
 # The elf2hxe tool.
-elf2hxe /tmp/hcc_build /tmp_build $2 $3
+elf2hxe /tmp/hcc_build $2 $3

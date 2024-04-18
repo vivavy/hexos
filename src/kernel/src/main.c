@@ -7,6 +7,6 @@
 #include <types.h>
 #include <platform.h>
 
-void main(void) {
-    hlt();
+void _start(void) {
+    halt();
 }

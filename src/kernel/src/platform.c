@@ -8,10 +8,7 @@
 
 #include <platform.h>
 
-void hlt(void)
+void halt(void)
 {
-    while (true)
-    {
-        asm volatile("hlt");
-    }
+    asm volatile("hlt\n\tjmp .-1");
 }
