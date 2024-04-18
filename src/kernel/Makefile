@@ -1,2 +1,2 @@
 main:
-	hcc main.c ../../dist/kernel.hxe config.json
+	hcc src/main.c ../../dist/kernel.hxe config.json

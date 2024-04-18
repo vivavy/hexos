@@ -3,10 +3,12 @@
 # This script is used to deactivate the build environment.
 # It removes this directory from the PATH and unsets the prompt.
 
-chmod -x buildenv/hcc
-
-export PATH="${OLD_PATH}"
-unset OLD_PATH
-
+chmod -x "${BENV_PATH}/hcc"
+chmod +x "${BENV_PATH}/activate"
+chmod -x "${BENV_PATH}/deactivate"
 export PS1="${OLD_PS1}"
+export PATH="${OLD_PATH}"
 unset OLD_PS1
+unset OLD_PATH
+unset BENV_PROJ_PATH
+unset BENV_PATH

@@ -9,8 +9,7 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-# The build script of the tcc compiler.
-x86_64-elf-gcc -m64 -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding $1 -o /tmp/hcc_build
+x86_64-elf-gcc -Iinclude -m64 -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding $1 -o /tmp/hcc_build
 if [ $? -ne 0 ]; then
     exit 1
 fi
