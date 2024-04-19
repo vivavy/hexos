@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <stdint.hpp>
 
 #define NULL ((void *)0)
 #define true -1
@@ -15,6 +15,10 @@
 #define offsetofinstance(type, instance, member) ((size_t) &((type *)instance)->member)
 #define in
 #define out
+#define nomangle extern "C"
+#define ok 0
+#define fail 1
 
-typedef db bool;
-typedef void *voidptr;
+typedef bool Bool;
+typedef uint64_t uint;
+typedef uint *pml4t_t;

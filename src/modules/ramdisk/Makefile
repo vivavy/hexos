@@ -35,17 +35,10 @@ define SUBMAKE
 endef
 
 all:
-	echo "    ${TASK}Building HexOS kernel${NC}"
-	echo "        ${ACT}Compile ${FILE}main.cpp${NC}"
-	x86_64-elf-g++ -c -Iinclude src/main.cpp -o ../../dist/kernel.o
-	$(call SUBMAKE, ../modules)
-	echo "        ${ACT}Linking kernel${NC}"
-	x86_64-elf-ld  -Tlinker.ld -o ../../dist/kernel.elf ../../dist/kernel.o
-	echo "        ${ACT}Translating to HXE${NC}"
-	elf2hxe ../../dist/kernel.elf ../../dist/kernel.hxe config.json
-	echo "    ${OK}Done${NC}"
+	echo "                ${TASK}Building RAMDisk module${NC}"
+	echo "                    ${ACT}Compile ${FILE}main.cpp${NC}"
+	x86_64-elf-g++ -c -Iinclude src/main.cpp -o ${BENV_PROJ_PATH}/dist/ramdisk.o
+	echo "                ${OK}Done${NC}"
 
 clean:
-	rm -f "${BENV_PROJ_PATH}/dist/kernel.o"
-	rm -f "${BENV_PROJ_PATH}/dist/kernel.elf"
-	rm -f "${BENV_PROJ_PATH}/dist/kernel.hxe"
+	rm -f "${BENV_PROJ_PATH}/dist/ramdisk.o"

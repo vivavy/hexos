@@ -5,8 +5,9 @@ Dependencies:
 
 * [elf2hxe](https://github.com/vivavy/elf2hxe)
 * [x86_64-elf-gcc](https://gcc.gnu.org/)
-* [python3](https://www.python.org/)
+* [python3.11](https://www.python.org/)
 * [bootylkaloader](https://github.com/pocom4/bootylkaloader)
+* [flat assembler](https://flatassembler.net/)
 
 To build the distribution:
 

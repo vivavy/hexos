@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.inc": "fasm-intel-x86_64",
+        "*.h": "c",
+        "*.vidb": "json",
+        "vidbrc": "python",
+        "*.sst": "fasm-intel-x86_64",
+        "types.hpp": "c"
+    }
+}

@@ -4,4 +4,5 @@ This directory contains the HexOS kernel modules.
 
 ## Folders
 
-*empty so far*
+* `ramdisk`: RAM disk module.
+* `initramfs`: Initramfs module.

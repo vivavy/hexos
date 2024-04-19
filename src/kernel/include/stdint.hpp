@@ -42,5 +42,5 @@ typedef uint32_t uint32;
 typedef int64_t int64;
 typedef uint64_t uint64;
 
-#define int i64
+#define Int i64
 #define uint u64
