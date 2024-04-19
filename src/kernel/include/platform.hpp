@@ -12,4 +12,4 @@
 
 void halt(void);
 
-#include "../src/platform.cpp"
+// #include "../src/platform.cpp"

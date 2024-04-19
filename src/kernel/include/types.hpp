@@ -22,3 +22,4 @@
 typedef bool Bool;
 typedef uint64_t uint;
 typedef uint *pml4t_t;
+typedef ub status;

@@ -14,4 +14,4 @@ static pml4t_t PML4T;
 
 extern uint endkernel;
 
-#include "../src/mmu.cpp"
+// #include "../src/mmu.cpp"
