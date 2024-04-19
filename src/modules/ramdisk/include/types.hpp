@@ -16,11 +16,13 @@
 #define in
 #define out
 #define nomangle extern "C"
-#define ok 0
-#define fail 1
+
+enum status {
+    ok = 0,
+    fail = 1
+};
 
 typedef uint64_t uint;
 typedef uint *pml4t_t;
-typedef ub status;
 
 #define int uint64_t

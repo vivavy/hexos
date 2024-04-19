@@ -37,7 +37,7 @@ endef
 all:
 	echo "    ${TASK}Building HexOS kernel${NC}"
 	echo "        ${ACT}Compile ${FILE}main.cpp${NC}"
-	x86_64-elf-g++ -c -Iinclude src/main.cpp -o ../../dist/kernel.o
+	x86_64-elf-g++ -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding -c -Iinclude src/main.cpp -o ../../dist/kernel.o
 	$(call SUBMAKE, ../modules)
 	echo "        ${ACT}Linking kernel${NC}"
 	x86_64-elf-ld  -Tlinker.ld -o ../../dist/kernel.elf ../../dist/kernel.o

@@ -37,7 +37,7 @@ endef
 all:
 	echo "                ${TASK}Building RAMDisk module${NC}"
 	echo "                    ${ACT}Compile ${FILE}main.cpp${NC}"
-	x86_64-elf-g++ -c -Iinclude src/main.cpp -o ${BENV_PROJ_PATH}/dist/ramdisk.o
+	x86_64-elf-g++ -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding -c -Iinclude src/main.cpp -o ${BENV_PROJ_PATH}/dist/ramdisk.o
 	echo "                ${OK}Done${NC}"
 
 clean:
