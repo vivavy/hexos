@@ -15,6 +15,8 @@ target_include_directories(hexos-x86_64.elf
   src/modules/ramdisk/include
 )
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -nostdlib")
+
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/hexos-x86_64.hxe
     COMMAND ${HXEC} ${CMAKE_CURRENT_SOURCE_DIR}/hexos-x86_64.elf ${CMAKE_CURRENT_SOURCE_DIR}/hexos-x86_64.hxe
