@@ -9,7 +9,12 @@
 #include <mmu.hpp>
 
 nomangle
-void _start(pml4t_t pml4t_) {
+void _start(pml4t pml4t_) {
     PML4T = pml4t_;
     halt();
+}
+
+nomangle
+void *kalloc(u64 size) {
+    return (void *)0;
 }

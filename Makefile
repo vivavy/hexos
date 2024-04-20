@@ -43,6 +43,7 @@ all: init
 	@echo "            ${ACT}Activate build environment${NC}"
 	@echo "        ${OK}Done${NC}"
 	@${MAKE} kernel
+	@${MAKE} clean
 	@echo "${OK}Done${NC}"
 
 kernel:

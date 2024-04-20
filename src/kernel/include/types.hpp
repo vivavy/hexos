@@ -8,17 +8,15 @@
 
 #include <stdint.hpp>
 
-#define NULL ((void *)0)
-#define true -1
-#define false 0
-#define offsetof(type, member) ((size_t) &((type *)0)->member)
-#define offsetofinstance(type, instance, member) ((size_t) &((type *)instance)->member)
-#define in
-#define out
+#define offsetof(type, member) ((u64) &((type *)0)->member)
+#define offsetofinstance(type, instance, member) ((u64) &((type *)instance)->member)
 #define nomangle extern "C"
-#define ok 0
-#define fail 1
+#define TYPE(orig, type) typedef orig _v_##type; using type = _v_##type
 
-typedef bool Bool;
-typedef uint64_t uint;
-typedef uint *pml4t_t;
+TYPE(u64 *, pml4t);
+TYPE(const char *, cchar);
+
+enum status {
+    ok = 0,
+    fail = 1
+};

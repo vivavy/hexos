@@ -4,43 +4,50 @@
  * that can be found in the LICENSE file.
  */
 
-#pragma once
+using int8_t = signed char;
+using uint8_t = unsigned char;
+using int16_t = signed short;
+using uint16_t = unsigned short;
+using int32_t = signed int;
+using uint32_t = unsigned int;
+using int64_t = signed long long;
+using uint64_t = unsigned long long;
+using int8_t = signed char;
+using uint8_t = unsigned char;
+using int16_t = signed short;
+using uint16_t = unsigned short;
+using int32_t = signed int;
+using uint32_t = unsigned int;
+using int64_t = signed long long;
+using uint64_t = unsigned long long;
 
-typedef signed char int8_t;
-typedef unsigned char uint8_t;
-typedef signed short int16_t;
-typedef unsigned short uint16_t;
-typedef signed int int32_t;
-typedef unsigned int uint32_t;
-typedef signed long long int64_t;
-typedef unsigned long long uint64_t;
+using i8 = int8_t;
+using u8 = uint8_t;
+using i16 = int16_t;
+using u16 = uint16_t;
+using i32 = int32_t;
+using u32 = uint32_t;
+using i64 = int64_t;
+using u64 = uint64_t;
 
-typedef int8_t i8;
-typedef uint8_t u8;
-typedef int16_t i16;
-typedef uint16_t u16;
-typedef int32_t i32;
-typedef uint32_t u32;
-typedef int64_t i64;
-typedef uint64_t u64;
+using ib = i8;
+using db = u8;
+using ub = u8;
+using iw = i16;
+using dw = u16;
+using uw = u16;
+using id = i32;
+using dd = u32;
+using ud = u32;
+using iq = i64;
+using dq = u64;
+using uq = u64;
 
-typedef i8 ib;
-typedef u8 db;
-typedef i16 iw;
-typedef u16 dw;
-typedef i32 id;
-typedef u32 dd;
-typedef i64 iq;
-typedef u64 dq;
-
-typedef int8_t int8;
-typedef uint8_t uint8;
-typedef int16_t int16;
-typedef uint16_t uint16;
-typedef int32_t int32;
-typedef uint32_t uint32;
-typedef int64_t int64;
-typedef uint64_t uint64;
-
-#define Int i64
-#define uint u64
+using int8 = int8_t;
+using uint8 = uint8_t;
+using int16 = int16_t;
+using uint16 = uint16_t;
+using int32 = int32_t;
+using uint32 = uint32_t;
+using int64 = int64_t;
+using uint64 = uint64_t;
