@@ -34,6 +34,7 @@ define SUBMAKE
 	@cd ${1} && ${MAKE}
 endef
 
+<<<<<<< HEAD
 CFLAGS = -o ${BENV_PROJ_PATH}/dist/kernel.elf -Tlinker.ld -std=c++20 -nostdlib \
 -nostartfiles -fno-stack-protector -s -ffreestanding -c -Iinclude
 
@@ -42,6 +43,15 @@ all:
 	echo "        ${ACT}Compile ${FILE}main.cpp${NC}"
 	x86_64-elf-g++ ${CFLAGS} src/main.cpp
 	# strip -s "${BENV_PROJ_PATH}/dist/kernel.elf"
+=======
+all:
+	echo "    ${TASK}Building HexOS kernel${NC}"
+	echo "        ${ACT}Compile ${FILE}main.cpp${NC}"
+	x86_64-elf-g++ -nostdlib -nostartfiles -fno-stack-protector -fno-pie -ffreestanding -c -Iinclude src/main.cpp -o ../../dist/kernel.o
+	$(call SUBMAKE, ../modules)
+	echo "        ${ACT}Linking kernel${NC}"
+	x86_64-elf-ld  -Tlinker.ld -o ../../dist/kernel.elf ../../dist/kernel.o
+>>>>>>> parent of d093cd7 (Global refactor and getting rid of .o kernel modules, now only .ii kernel modules are used)
 	echo "        ${ACT}Translating to HXE${NC}"
 	elf2hxe ../../dist/kernel.elf ../../dist/kernel.hxe config.json
 	rm -f "${BENV_PROJ_PATH}/dist/kernel.elf"

@@ -4,7 +4,7 @@
         "*.h": "c",
         "*.vidb": "json",
         "vidbrc": "python",
-        "compare": "cpp",
-        "type_traits": "cpp"
+        "*.sst": "fasm-intel-x86_64",
+        "types.hpp": "c"
     }
 }

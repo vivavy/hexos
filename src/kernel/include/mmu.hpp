@@ -10,6 +10,8 @@
 
 #include <types.hpp>
 
-static pml4t PML4T;
+static pml4t_t PML4T;
 
-extern u64 endkernel;
+extern uint endkernel;
+
+// #include "../src/mmu.cpp"

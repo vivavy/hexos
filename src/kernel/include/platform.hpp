@@ -10,7 +10,6 @@
 
 #include <types.hpp>
 
-inline void halt(void)
-{
-    asm volatile("hlt\n\tjmp .-1");
-}
+void halt(void);
+
+// #include "../src/platform.cpp"
