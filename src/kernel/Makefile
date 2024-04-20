@@ -35,17 +35,17 @@ define SUBMAKE
 endef
 
 CFLAGS = -o ${BENV_PROJ_PATH}/dist/kernel.elf -Tlinker.ld -std=c++20 -nostdlib \
--nostartfiles -fno-stack-protector -fno-pie -ffreestanding -c -Iinclude
+-nostartfiles -fno-stack-protector -s -ffreestanding -c -Iinclude
 
 all:
 	echo "    ${TASK}Building HexOS kernel${NC}"
 	echo "        ${ACT}Compile ${FILE}main.cpp${NC}"
 	x86_64-elf-g++ ${CFLAGS} src/main.cpp
+	# strip -s "${BENV_PROJ_PATH}/dist/kernel.elf"
 	echo "        ${ACT}Translating to HXE${NC}"
 	elf2hxe ../../dist/kernel.elf ../../dist/kernel.hxe config.json
+	rm -f "${BENV_PROJ_PATH}/dist/kernel.elf"
 	echo "    ${OK}Done${NC}"
 
 clean:
-	rm -f "${BENV_PROJ_PATH}/dist/kernel.o"
-	rm -f "${BENV_PROJ_PATH}/dist/kernel.elf"
 	rm -f "${BENV_PROJ_PATH}/dist/kernel.hxe"
