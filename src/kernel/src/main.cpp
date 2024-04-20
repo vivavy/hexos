@@ -9,7 +9,6 @@
 #include <mmu.hpp>
 
 nomangle
-void _start(pml4t_t pml4t_) {
-    PML4T = pml4t_;
+void _start(paddr_t physmem, vaddr_t virtmem) {
     halt();
 }

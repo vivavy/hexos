@@ -7,4 +7,3 @@ This directory contains the HexOS source code.
 * `apps`: Applications for HexOS.
 * `drivers`: Drivers for HexOS.
 * `kernel`: HexOS kernel.
-* `modules`: HexOS kernel modules.

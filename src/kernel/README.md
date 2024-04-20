@@ -16,3 +16,5 @@ $ make
 * `src`: Source files for the kernel.
 * `linker.ld`: Linker script for the kernel.
 * `asm`: Assembly files for the kernel.
+
+* `include/modules/ramd.hpp`: RAM disk module, broken for now.

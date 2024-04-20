@@ -9,9 +9,38 @@
 #pragma once
 
 #include <types.hpp>
+#include <asm/flags.hpp>
+#include <asm/cregs.hpp>
 
-static pml4t_t PML4T;
+using uintptr_t = u64 *;
+using paddr_t = uintptr_t;
+using vaddr_t = uintptr_t;
 
-extern uint endkernel;
+// TLB - Translation Lookaside Buffer
+// TLBR - Translation Lookaside Buffer Record
+struct tlbr {
+    paddr_t paddr;  // physical address
+    vaddr_t vaddr;  // virtual address
+    u64 flags;      // flags
+};
 
-// #include "../src/mmu.cpp"
+// TLBRT - Translation Lookaside Buffer Record Table (same as TLB)
+using tlbrt = struct tlbr *;
+
+namespace mmu {
+    namespace tlb {
+        inline void flush(vaddr_t addr = nullptr) {
+            if (addr == (vaddr_t)-1) set_cr3(get_cr3());
+            else asm volatile("invlpg (%0)" ::"r" (addr) : "memory");
+        }
+    }
+    inline void enable() {
+        set_cr0(get_cr0() | X86_CR0_PG | X86_CR0_WP);
+    }
+    inline void disable() {
+        set_cr0(get_cr0() & ~(X86_CR0_PG));
+    }
+    inline vaddr_t get_fault_addr() {
+        return (vaddr_t)(u64)get_cr2();
+    }
+}
