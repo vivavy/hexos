@@ -12,6 +12,7 @@
 #include <asm/flags.hpp>
 #include <asm/cregs.hpp>
 
+//                          WARNING: ONLY FOR x86_64 for now!
 using uintptr_t = u64 *;
 using paddr_t = uintptr_t;
 using vaddr_t = uintptr_t;
