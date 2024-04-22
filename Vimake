@@ -1,10 +1,10 @@
 module: hexos
 version: 0.0.3-34
 impls:
-  amd64:
+  x86_64:
     deps:
       build:
-      - x86_64-elf-g++
+      - ${ImplName}-elf-g++
       - x86_64-elf-gcc
       - x86_64-elf-ld
       - x86_64-elf-as
@@ -13,50 +13,69 @@ impls:
     actions:
       build:
         commands: []
-        deps: []
         files: []
-  ia32:
+  i686:
     deps:
       build:
-      - i686-elf-g++
-      - i686-elf-gcc
-      - i686-elf-ld
-      - i686-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules:
       - kernel
+    actions:
+      build:
+        commands: []
+        files: []
   aarch64:
     deps:
       build:
-      - aarch64-elf-g++
-      - aarch64-elf-gcc
-      - aarch64-elf-ld
-      - aarch64-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules:
       - kernel
+    actions:
+      build:
+        commands: []
+        files: []
   mips:
     deps:
       build:
-      - mips-elf-g++
-      - mips-elf-gcc
-      - mips-elf-ld
-      - mips-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules:
       - kernel
-  ppc:
+    actions:
+      build:
+        commands: []
+        files: []
+  powerpc:
     deps:
       build:
-      - powerpc-elf-g++
-      - powerpc-elf-gcc
-      - powerpc-elf-ld
-      - powerpc-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules:
       - kernel
-  aarch32:
+    actions:
+      build:
+        commands: []
+        files: []
+  arm:
     deps:
       build:
-      - arm-elf-g++
-      - arm-elf-gcc
-      - arm-elf-ld
-      - arm-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules:
       - kernel
+    actions:
+      build:
+        commands: []
+        files: []

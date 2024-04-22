@@ -1,21 +1,39 @@
 module: kernel
 version: 0.0.3-34
+autoimpls:
+  source: x86_64
+  dest:
+    i686:
+      params:
+        bitness: 32
+    aarch64: {}
+    mips:
+      params:
+        bitness: 32
+    powerpc:
+      params:
+        bitness: 32
+    arm:
+      params:
+        bitness: 32
 impls:
-  amd64:
+  x86_64:
+    params:
+      bitness: 64
     deps:
       build:
-      - x86_64-elf-g++
-      - x86_64-elf-gcc
-      - x86_64-elf-ld
-      - x86_64-elf-as
+      - ${ImplName}-elf-g++
+      - ${ImplName}-elf-gcc
+      - ${ImplName}-elf-ld
+      - ${ImplName}-elf-as
       modules: []
     actions:
       build:
         commands:
-        - - x86_64-elf-g++
+        - - ${ImplName}-elf-g++
           - -Iinclude
-          - -Iinclude/arch/amd64
-          - -m64
+          - -Iinclude/arch/${ImplName}
+          - -m${param:bitness}
           - -nostdlib
           - -nostartfiles
           - -fno-stack-protector
@@ -27,155 +45,6 @@ impls:
         - - elf2hxe
           - ../../dist/kernel.elf
           - ../../dist/kernel.hxe
-          - hxeconfs/amd64.json
-        deps: []
-        files:
-        - ../../dist/kernel.elf
-  ia32:
-    deps:
-      build:
-      - i686-elf-g++
-      - i686-elf-gcc
-      - i686-elf-ld
-      - i686-elf-as
-      modules: []
-    actions:
-      build:
-        commands:
-        - - i686-elf-g++
-          - -Iinclude
-          - -Iinclude/arch/ia32
-          - -m32
-          - -fno-stack-protector
-          - -fno-pie
-          - -ffreestanding
-          - -nostdlib
-          - -nostartfiles
-          - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-        - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
-          - hxeconfs/ia32.json
-        deps: []
-        files:
-        - ../../dist/kernel.elf
-  aarch64:
-    deps:
-      build:
-      - aarch64-elf-g++
-      - aarch64-elf-gcc
-      - aarch64-elf-ld
-      - aarch64-elf-as
-      modules: []
-    actions:
-      build:
-        commands:
-        - - aarch64-elf-gcc
-          - -Iinclude
-          - -Iinclude/arch/aarch64
-          - -m64
-          - -fno-stack-protector
-          - -fno-pie
-          - -ffreestanding
-          - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-        - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
-          - hxeconfs/aarch64.json
-        deps: []
-        files:
-        - ../../dist/kernel.elf
-  mips:
-    deps:
-      build:
-      - mips-elf-g++
-      - mips-elf-gcc
-      - mips-elf-ld
-      - mips-elf-as
-      modules: []
-    actions:
-      build:
-        commands:
-        - - mips-elf-g++
-          - -Iinclude
-          - -Iinclude/arch/mips
-          - -m32
-          - -nostdlib
-          - -nostartfiles
-          - -fno-stack-protector
-          - -fno-pie
-          - -ffreestanding
-          - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-        - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
-          - hxeconfs/mips.json
-        deps: []
-        files:
-        - ../../dist/kernel.elf
-  ppc:
-    deps:
-      build:
-      - powerpc-elf-g++
-      - powerpc-elf-gcc
-      - powerpc-elf-ld
-      - powerpc-elf-as
-      modules: []
-    actions:
-      build:
-        commands:
-        - - powerpc-elf-g++
-          - -Iinclude
-          - -Iinclude/arch/ppc
-          - -m32
-          - -nostdlib
-          - -nostartfiles
-          - -fno-stack-protector
-          - -fno-pie
-          - -ffreestanding
-          - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-        - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
-          - hxeconfs/ppc.json
-        deps: []
-        files:
-        - ../../dist/kernel.elf
-  aarch32:
-    deps:
-      build:
-      - arm-elf-g++
-      - arm-elf-gcc
-      - arm-elf-ld
-      - arm-elf-as
-      modules: []
-    actions:
-      build:
-        commands:
-        - - arm-elf-g++
-          - -Iinclude
-          - -Iinclude/arch/aarch32
-          - -m32
-          - -nostdlib
-          - -nostartfiles
-          - -fno-stack-protector
-          - -fno-pie
-          - -ffreestanding
-          - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-        - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
-          - hxeconfs/aarch32.json
-        deps: []
+          - hxeconfs/${ImplName}.json
         files:
         - ../../dist/kernel.elf
