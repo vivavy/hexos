@@ -8,12 +8,15 @@ Dependencies:
 * [python3.11](https://www.python.org/)
 * [bootylkaloader](https://github.com/pocom4/bootylkaloader)
 * [flat assembler](https://flatassembler.net/)
+* [Vimake](https://github.com/vivavy/vimake)
 
 To build the distribution:
 
 1. Install dependencies
-2. Run `make`
+2. Run `vimake <arch>`
 3. Done!
+
+Note: You can check missing dependencies with `vimake <arch> -d`.
 
 ## Folders and files
 

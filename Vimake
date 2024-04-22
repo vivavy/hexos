@@ -1,0 +1,91 @@
+{
+    "module": "hexos",
+    "version": "0.0.3-34",
+    "impls": {
+        "amd64": {
+            "deps": {
+                "build": [
+                    "x86_64-elf-g++",
+                    "x86_64-elf-gcc",
+                    "x86_64-elf-ld",
+                    "x86_64-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            },
+            "actions": {
+                "build": {
+                    "commands": [],
+                    "deps": [],
+                    "files": []
+                }
+            }
+        },
+        "ia32": {
+            "deps": {
+                "build": [
+                    "i686-elf-g++",
+                    "i686-elf-gcc",
+                    "i686-elf-ld",
+                    "i686-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            }
+        },
+        "aarch64": {
+            "deps": {
+                "build": [
+                    "aarch64-elf-g++",
+                    "aarch64-elf-gcc",
+                    "aarch64-elf-ld",
+                    "aarch64-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            }
+        },
+        "mips": {
+            "deps": {
+                "build": [
+                    "mips-elf-g++",
+                    "mips-elf-gcc",
+                    "mips-elf-ld",
+                    "mips-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            }
+        },
+        "ppc": {
+            "deps": {
+                "build": [
+                    "powerpc-elf-g++",
+                    "powerpc-elf-gcc",
+                    "powerpc-elf-ld",
+                    "powerpc-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            }
+        },
+        "aarch32": {
+            "deps": {
+                "build": [
+                    "arm-elf-g++",
+                    "arm-elf-gcc",
+                    "arm-elf-ld",
+                    "arm-elf-as"
+                ],
+                "modules": [
+                    "kernel"
+                ]
+            }
+        }
+    }
+}

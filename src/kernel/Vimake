@@ -1,0 +1,214 @@
+{
+    "module": "kernel",
+    "version": "0.0.3-34",
+    "impls": {
+        "amd64": {
+            "deps": {
+                "build": [
+                    "x86_64-elf-g++",
+                    "x86_64-elf-gcc",
+                    "x86_64-elf-ld",
+                    "x86_64-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+            "actions": {
+                "build": {
+                    "commands": [
+						[
+							"x86_64-elf-g++",
+							"-Iinclude",
+							"-m64",
+							"-nostdlib",
+							"-nostartfiles",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        },
+        "ia32": {
+            "deps": {
+                "build": [
+                    "i686-elf-g++",
+                    "i686-elf-gcc",
+                    "i686-elf-ld",
+                    "i686-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+			"actions": {
+                "build": {
+                    "commands": [
+						[
+							"i686-elf-g++",
+							"-Iinclude",
+							"-m32",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-nostdlib",
+							"-nostartfiles",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        },
+        "aarch64": {
+            "deps": {
+                "build": [
+                    "aarch64-elf-g++",
+                    "aarch64-elf-gcc",
+                    "aarch64-elf-ld",
+                    "aarch64-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+			"actions": {
+                "build": {
+                    "commands": [
+						[
+							"aarch64-elf-gcc",
+							"-Iinclude",
+							"-m64",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        },
+        "mips": {
+            "deps": {
+                "build": [
+                    "mips-elf-g++",
+                    "mips-elf-gcc",
+                    "mips-elf-ld",
+                    "mips-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+			"actions": {
+                "build": {
+                    "commands": [
+						[
+							"mips-elf-g++",
+							"-Iinclude",
+							"-m32",
+							"-nostdlib",
+							"-nostartfiles",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        },
+        "ppc": {
+            "deps": {
+                "build": [
+                    "powerpc-elf-g++",
+                    "powerpc-elf-gcc",
+                    "powerpc-elf-ld",
+                    "powerpc-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+			"actions": {
+                "build": {
+                    "commands": [
+						[
+							"powerpc-elf-g++",
+							"-Iinclude",
+							"-m32",
+							"-nostdlib",
+							"-nostartfiles",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        },
+        "aarch32": {
+            "deps": {
+                "build": [
+                    "arm-elf-g++",
+                    "arm-elf-gcc",
+                    "arm-elf-ld",
+                    "arm-elf-as"
+                ],
+                "modules": [
+                ]
+            },
+			"actions": {
+                "build": {
+                    "commands": [
+						[
+							"arm-elf-g++",
+							"-Iinclude",
+							"-m32",
+							"-nostdlib",
+							"-nostartfiles",
+							"-fno-stack-protector",
+							"-fno-pie",
+							"-ffreestanding",
+							"-o",
+							"dist/kernel.elf",
+							"src/main.cpp"
+						]
+					],
+                    "deps": [],
+                    "files": [
+						"dist/kernel.elf"
+					]
+                }
+            }
+        }
+    }
+}

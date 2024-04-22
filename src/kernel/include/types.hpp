@@ -1,7 +1,7 @@
 #if defined(__x86_64__) || defined(_M_X64) // annoying but all is okay
     #include <arch/amd64/types.hpp>
 #elif defined(i386) || defined(__i386__) || defined(__i386) || defined(_M_IX86)
-    #include <arch/x86/types.hpp>
+    #include <arch/ia32/types.hpp>
 #elif defined(__ARM_ARCH_7S__)
     #include <arch/aarch32/types.hpp>
 #elif defined(__aarch64__) || defined(_M_ARM64)
