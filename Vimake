@@ -1,5 +1,15 @@
 module: hexos
 version: 0.0.3-34
+autoimpls:
+  source: x86_64
+  dest:
+    i686:
+      params:
+        bitness: 32
+    aarch64: {}
+    arm:
+      params:
+        bitness: 32
 impls:
   x86_64:
     deps:
@@ -8,71 +18,6 @@ impls:
       - x86_64-elf-gcc
       - x86_64-elf-ld
       - x86_64-elf-as
-      modules:
-      - kernel
-    actions:
-      build:
-        commands: []
-        files: []
-  i686:
-    deps:
-      build:
-      - ${ImplName}-elf-g++
-      - ${ImplName}-elf-gcc
-      - ${ImplName}-elf-ld
-      - ${ImplName}-elf-as
-      modules:
-      - kernel
-    actions:
-      build:
-        commands: []
-        files: []
-  aarch64:
-    deps:
-      build:
-      - ${ImplName}-elf-g++
-      - ${ImplName}-elf-gcc
-      - ${ImplName}-elf-ld
-      - ${ImplName}-elf-as
-      modules:
-      - kernel
-    actions:
-      build:
-        commands: []
-        files: []
-  mips:
-    deps:
-      build:
-      - ${ImplName}-elf-g++
-      - ${ImplName}-elf-gcc
-      - ${ImplName}-elf-ld
-      - ${ImplName}-elf-as
-      modules:
-      - kernel
-    actions:
-      build:
-        commands: []
-        files: []
-  powerpc:
-    deps:
-      build:
-      - ${ImplName}-elf-g++
-      - ${ImplName}-elf-gcc
-      - ${ImplName}-elf-ld
-      - ${ImplName}-elf-as
-      modules:
-      - kernel
-    actions:
-      build:
-        commands: []
-        files: []
-  arm:
-    deps:
-      build:
-      - ${ImplName}-elf-g++
-      - ${ImplName}-elf-gcc
-      - ${ImplName}-elf-ld
-      - ${ImplName}-elf-as
       modules:
       - kernel
     actions:

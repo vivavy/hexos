@@ -7,12 +7,6 @@ autoimpls:
       params:
         bitness: 32
     aarch64: {}
-    mips:
-      params:
-        bitness: 32
-    powerpc:
-      params:
-        bitness: 32
     arm:
       params:
         bitness: 32
