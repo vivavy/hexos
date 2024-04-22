@@ -3,12 +3,9 @@
  * Use of this source code is governed by a Mozilla Public License 2.0
  * that can be found in the LICENSE file.
  * 
- * This file contains the platform-specific implementations of functions and macros.
+ * CPU architecture specific definitions.
  */
 
-#include <platform.hpp>
-
-void halt(void)
-{
-    asm volatile("hlt\n\tjmp .-1");
+inline void halt(void) {
+    asm volatile("wfe\n\tjmp .-1");
 }

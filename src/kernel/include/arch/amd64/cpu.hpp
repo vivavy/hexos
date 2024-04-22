@@ -3,8 +3,9 @@
  * Use of this source code is governed by a Mozilla Public License 2.0
  * that can be found in the LICENSE file.
  * 
- * This file contains the MMU implementation.
+ * CPU architecture specific definitions.
  */
 
-#include <mmu.hpp>
-#include <types.hpp>
+inline void halt(void) {
+    asm volatile("hlt\n\tjmp .-1");
+}

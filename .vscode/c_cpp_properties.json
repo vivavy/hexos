@@ -4,6 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/src/kernel/include/arch/**",
+                "${workspaceFolder}/src/kernel/include/arch/**/**",
                 "${workspaceFolder}/src/kernel/include/**",
                 "${workspaceFolder}/src/kernel/**",
                 "${workspaceFolder}/src/**"

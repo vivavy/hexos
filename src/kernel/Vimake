@@ -19,6 +19,7 @@
 						[
 							"x86_64-elf-g++",
 							"-Iinclude",
+                            "-Iinclude/arch/amd64",
 							"-m64",
 							"-nostdlib",
 							"-nostartfiles",
@@ -26,13 +27,19 @@
 							"-fno-pie",
 							"-ffreestanding",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/amd64.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }
@@ -54,6 +61,7 @@
 						[
 							"i686-elf-g++",
 							"-Iinclude",
+                            "-Iinclude/arch/ia32",
 							"-m32",
 							"-fno-stack-protector",
 							"-fno-pie",
@@ -61,13 +69,19 @@
 							"-nostdlib",
 							"-nostartfiles",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/ia32.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }
@@ -89,18 +103,25 @@
 						[
 							"aarch64-elf-gcc",
 							"-Iinclude",
+                            "-Iinclude/arch/aarch64",
 							"-m64",
 							"-fno-stack-protector",
 							"-fno-pie",
 							"-ffreestanding",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/aarch64.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }
@@ -122,6 +143,7 @@
 						[
 							"mips-elf-g++",
 							"-Iinclude",
+                            "-Iinclude/arch/mips",
 							"-m32",
 							"-nostdlib",
 							"-nostartfiles",
@@ -129,13 +151,19 @@
 							"-fno-pie",
 							"-ffreestanding",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/mips.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }
@@ -157,6 +185,7 @@
 						[
 							"powerpc-elf-g++",
 							"-Iinclude",
+                            "-Iinclude/arch/ppc",
 							"-m32",
 							"-nostdlib",
 							"-nostartfiles",
@@ -164,13 +193,19 @@
 							"-fno-pie",
 							"-ffreestanding",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/ppc.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }
@@ -192,6 +227,7 @@
 						[
 							"arm-elf-g++",
 							"-Iinclude",
+                            "-Iinclude/arch/aarch32",
 							"-m32",
 							"-nostdlib",
 							"-nostartfiles",
@@ -199,13 +235,19 @@
 							"-fno-pie",
 							"-ffreestanding",
 							"-o",
-							"dist/kernel.elf",
+							"../../dist/kernel.elf",
 							"src/main.cpp"
-						]
+						],
+                        [
+                            "elf2hxe",
+                            "../../dist/kernel.elf",
+                            "../../dist/kernel.hxe",
+                            "hxeconfs/aarch32.json"
+                        ]
 					],
                     "deps": [],
                     "files": [
-						"dist/kernel.elf"
+						"../../dist/kernel.elf"
 					]
                 }
             }

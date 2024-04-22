@@ -8,6 +8,9 @@
 
 #pragma once
 
+// DEPRECATED CODE
+
+/*
 #include <types.hpp>
 #include <asm/flags.hpp>
 #include <asm/cregs.hpp>
@@ -45,3 +48,4 @@ namespace mmu {
         return (vaddr_t)(u64)get_cr2();
     }
 }
+*/
