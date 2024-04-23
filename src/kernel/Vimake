@@ -31,26 +31,29 @@ impls:
           - -fno-stack-protector
           - -fno-pie
           - -ffreestanding
+          - -c
           - -o
-          - ../../dist/arith.o
-          - src/arith.c
-          - src/main.cpp
+          - ${ProjRoot}/dist/arith.o
+          - ${ProjRoot}/src/kernel/src/arith.c
         - - ${ImplName}-elf-g++
-          - -Iinclude
-          - -Iinclude/arch/${ImplName}
+          - -std=c++20
+          - -I${ProjRoot}/include
+          - -I${ProjRoot}/include/arch/${ImplName}
           - -m${param:bitness}
           - -nostdlib
           - -nostartfiles
+          - -nostdinc
+          - -nostdinc++
           - -fno-stack-protector
           - -fno-pie
           - -ffreestanding
           - -o
-          - ../../dist/kernel.elf
-          - src/main.cpp
-          - ../../dist/arith.o
+          - ${ProjRoot}/dist/kernel.elf
+          - ${ProjRoot}/src/kernel/src/main.cpp
+          - ${ProjRoot}/dist/arith.o
         - - elf2hxe
-          - ../../dist/kernel.elf
-          - ../../dist/kernel.hxe
+          - ${ProjRoot}/dist/kernel.elf
+          - ${ProjRoot}/dist/kernel.hxe
           - hxeconfs/${ImplName}.json
         files:
-        - ../../dist/kernel.elf
+        - ${ProjRoot}/dist/kernel.elf
