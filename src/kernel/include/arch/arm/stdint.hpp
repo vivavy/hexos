@@ -42,6 +42,20 @@ using uint32 = u32;
 using int64 = i64;
 using uint64 = u64;
 
-using uint = u64;
+using uint = u32;
 
-#define int i64
+#define int i32
+
+using size_t = uint;
+
+inline constexpr uint INT_MAX = ((uint)(-1LL));
+
+#define ARCH "arm"
+
+namespace arch {
+    inline const char *name = ARCH;
+    inline const u8 bitness = 64;
+    inline const char *family = "arm";
+    inline const char *prodname = "ARM";
+}
+
