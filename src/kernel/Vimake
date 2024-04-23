@@ -37,8 +37,8 @@ impls:
           - ${ModuleRoot}/src/kernel/src/arith.c
         - - ${ImplName}-elf-g++
           - -std=c++20
-          - -I${ModuleRoot}/include
-          - -I${ModuleRoot}/include/arch/${ImplName}
+          - -Iinclude
+          - -Iinclude/arch/${ImplName}
           - -m${param:bitness}
           - -nostdlib
           - -nostartfiles
