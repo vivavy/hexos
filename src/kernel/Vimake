@@ -33,12 +33,12 @@ impls:
           - -ffreestanding
           - -c
           - -o
-          - ${ProjRoot}/dist/arith.o
-          - ${ProjRoot}/src/kernel/src/arith.c
+          - ${ModuleRoot}/dist/arith.o
+          - ${ModuleRoot}/src/kernel/src/arith.c
         - - ${ImplName}-elf-g++
           - -std=c++20
-          - -I${ProjRoot}/include
-          - -I${ProjRoot}/include/arch/${ImplName}
+          - -I${ModuleRoot}/include
+          - -I${ModuleRoot}/include/arch/${ImplName}
           - -m${param:bitness}
           - -nostdlib
           - -nostartfiles
@@ -48,12 +48,12 @@ impls:
           - -fno-pie
           - -ffreestanding
           - -o
-          - ${ProjRoot}/dist/kernel.elf
-          - ${ProjRoot}/src/kernel/src/main.cpp
-          - ${ProjRoot}/dist/arith.o
+          - ${ModuleRoot}/dist/kernel.elf
+          - ${ModuleRoot}/src/kernel/src/main.cpp
+          - ${ModuleRoot}/dist/arith.o
         - - elf2hxe
-          - ${ProjRoot}/dist/kernel.elf
-          - ${ProjRoot}/dist/kernel.hxe
+          - ${ModuleRoot}/dist/kernel.elf
+          - ${ModuleRoot}/dist/kernel.hxe
           - hxeconfs/${ImplName}.json
         files:
-        - ${ProjRoot}/dist/kernel.elf
+        - ${ModuleRoot}/dist/kernel.elf
