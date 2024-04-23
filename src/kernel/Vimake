@@ -24,6 +24,17 @@ impls:
     actions:
       build:
         commands:
+        - - ${ImplName}-elf-gcc
+          - -m${param:bitness}
+          - -nostdlib
+          - -nostartfiles
+          - -fno-stack-protector
+          - -fno-pie
+          - -ffreestanding
+          - -o
+          - ../../dist/arith.o
+          - src/arith.c
+          - src/main.cpp
         - - ${ImplName}-elf-g++
           - -Iinclude
           - -Iinclude/arch/${ImplName}
@@ -36,6 +47,7 @@ impls:
           - -o
           - ../../dist/kernel.elf
           - src/main.cpp
+          - ../../dist/arith.o
         - - elf2hxe
           - ../../dist/kernel.elf
           - ../../dist/kernel.hxe

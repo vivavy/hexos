@@ -6,8 +6,11 @@
 
 #include <types.hpp>
 #include <cpu.hpp>
+#include <fb.hpp>
 
 nomangle
 void _start(void *bootinfo) {
+    fb::teletype::init();
+    fb::teletype::putString("\e02mHello, World!\e07m");
     halt();
 }
