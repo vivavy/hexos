@@ -8,11 +8,11 @@ SECTIONS{
         *(.text)
     }
 
-    .rodata ALIGN (0x1000) : {
+    .rodata : {
         *(.rodata)
     }
 
-    .data ALIGN (0x1000) : {
+    .data : {
         *(.data)
         end_data = .;
     }
@@ -22,6 +22,9 @@ SECTIONS{
         *(COMMON)
         *(.bss)
         ebss = .;
+    }
+
+    .xbss : {
         endkernel = .;
     }
 }

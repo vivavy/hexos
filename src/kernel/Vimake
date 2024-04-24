@@ -34,12 +34,13 @@ impls:
           - -c
           - -o
           - ${ModuleRoot}/dist/arith.o
-          - ${ModuleRoot}/src/kernel/src/arith.c
+          - src/arith.c
         - - ${ImplName}-elf-g++
           - -std=c++20
           - -Iinclude
           - -Iinclude/arch/${ImplName}
           - -m${param:bitness}
+          - -Tlinker.ld
           - -nostdlib
           - -nostartfiles
           - -nostdinc
@@ -49,7 +50,7 @@ impls:
           - -ffreestanding
           - -o
           - ${ModuleRoot}/dist/kernel.elf
-          - ${ModuleRoot}/src/kernel/src/main.cpp
+          - src/main.cpp
           - ${ModuleRoot}/dist/arith.o
         - - elf2hxe
           - ${ModuleRoot}/dist/kernel.elf
